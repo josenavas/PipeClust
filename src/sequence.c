@@ -132,7 +132,7 @@ void write_sequence(sequence* seq, FILE* fd){
 void free_sequence(sequence* seq){
     free(seq->label);
     free(seq->sequence);
-    free(seq);
+    seq = free(seq);
 }
 
 /* Hackish - will revisit later */
