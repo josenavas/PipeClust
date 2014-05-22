@@ -24,6 +24,7 @@ void _serial_dereplication(char* fasta_fp, derep_db* db){
     while(seq != NULL){
         // Compare if the sequence already exist on the DB
         dereplicate_db(db, seq);
+        free_sequence(seq);
         // Read next sequence
         seq = read_sequence(fd);
     }
@@ -77,6 +78,7 @@ void _parallel_dereplication(char* fasta_fp, derep_db* db, int first, int n_part
     while(seq != NULL){
         // Compare if the sequence already exist on the DB
         dereplicate_db(db, seq);
+        free_sequence(seq);
         // Update current sequence
         current += n_partners;
         // Read the next sequence

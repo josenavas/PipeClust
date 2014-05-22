@@ -110,10 +110,11 @@ sequence* read_sequence_by_idx(FILE *fd, int idx){
     if(CURR_SEQ > idx)
         return NULL;
     // Skip sequences until the one we have to read
-    sequence* seq;
-    do{
+    sequence* seq = read_sequence(fd);
+    while(CURR_SEQ <= idx && seq != NULL){
+        free_sequence(seq);
         seq = read_sequence(fd);
-    } while(CURR_SEQ <= idx && seq != NULL);
+    }
     // Return the sequence to read
     return seq;
 }
@@ -132,7 +133,8 @@ void write_sequence(sequence* seq, FILE* fd){
 void free_sequence(sequence* seq){
     free(seq->label);
     free(seq->sequence);
-    seq = free(seq);
+    free(seq);
+    seq = NULL;
 }
 
 /* Hackish - will revisit later */

@@ -81,7 +81,8 @@ void destroy_seq_replica(seq_replicas* r){
     // Free the sequence memory
     free(r->sequence);
     // Free the whole structure memory
-    r = free(r);
+    free(r);
+    r = NULL;
 }
 
 /*
@@ -303,7 +304,8 @@ void destroy_derep_db(derep_db* db){
         destroy_seq_replica(current);
     }
     // Free all memory
-    db = free(db);
+    free(db);
+    db = NULL;
 }
 
 /*
